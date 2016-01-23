@@ -1,6 +1,7 @@
 package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -8,6 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.ChartData;
+import lecho.lib.hellocharts.model.ColumnChartData;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.view.LineChartView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +47,32 @@ public class ResultsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = new Intent(getActivity(), LineChartView.class);
+        startActivity(intent);
+
+
+        LineChartView chart = new LineChartView(getContext());
+        LineChartData data = chart.getLineChartData();
+//        chart.setLineChartData();
+//        data.
+
+        Axis xaxis = new Axis();
+
+        List<AxisValue> mXValues = xaxis.getValues();
+//        AxisValue newAxisValue = new AxisValue();
+//        newAxisValue = 2;
+//        mXValues.add(newAxisValue);
+        xaxis.setValues(mXValues);
+
+//        Axis xaxis = new Axis();
+
+//        data.setAxisXBottom(axisX);
+
+//        ChartData.setAxisXBottom(Axis axisX);
+//        ColumnChartData.setStacked(boolean isStacked);
+//        Line.setStrokeWidth(int strokeWidthDp);
+
+
 
     }
 
