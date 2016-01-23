@@ -61,25 +61,27 @@ public class GridViewFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        setContentView(R.layout.main);
 
-        GridViewFragment gridview = (GridViewFragment) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
-
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(HelloGridView.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_grid_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_grid_view, container, false);
 
+        //setContentView(view);
 
+        GridViewFragment gridview = (GridViewFragment) view.findViewById(R.id.mygridview);
+        gridview.setAdapter(new ImageAdapter(this));
+
+//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View v,
+//                                    int position, long id) {
+//                Toast.makeText(HelloGridView.this, "" + position,
+//                        Toast.LENGTH_SHORT).show();
+////
+//
     }
 
     // TODO: Rename method, update argument and hook method into UI event

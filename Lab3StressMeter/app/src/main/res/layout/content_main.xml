@@ -12,4 +12,10 @@
     tools:context="edu.dartmouth.cs.gracemiller.lab3stressmeter.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <fragment android:name="edu.dartmouth.cs.gracemiller.lab3stressmeter.GridViewFragment"
+        android:id="@+id/gridViewFragment"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>

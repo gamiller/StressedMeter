@@ -1,5 +1,8 @@
 package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,14 +30,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,8 +47,39 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
+        mImageView = (ImageView) findViewById(R.id.imageView);
+
+        //gridViewFrag = findViewById(R.id.GridViewFragment);
+
+        //UNCOMMENT NEXT TWO LINES
+//        GridView thisGrid = findViewById(R.id.mygridview);
+//
+//        FragmentManager fragmentManager = getFragmentManager().beginTransaction().replace(R.id.mygridview).commit();
+
+
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        GridViewFragment fragment = new GridViewFragment();
+//        fragmentTransaction.add(R.id.fragment_grid_view, fragment);
+//        fragmentTransaction.commit();
+//
+//        setContentView(R.layout.fragment_grid_view);
+//
+//        GridViewFragment gridview = (GridViewFragment) findViewById(R.id.GridViewFragment);
+//        gridview.setAdapter(new ImageAdapter(this));
+
+//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View v,
+//                                    int position, long id) {
+//                Toast.makeText(HelloGridView.this, "" + position,
+//                        Toast.LENGTH_SHORT).show();
+//
+//
+//            }
+//    }
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -79,6 +117,23 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+//            fragment = new GridViewFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.mainFrame, fragment);
+//            ft.commit();
+
+        } else if (id == R.id.nav_gallery) {
+
+        }
+
+//        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(R.id.content_frame, fragment);
+//        ft.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
