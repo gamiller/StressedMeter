@@ -1,5 +1,6 @@
 package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoActivity extends AppCompatActivity {
+public class PhotoActivity extends Activity {
 
     int mStressScore, mPicID;
     Button mCancelButton, mSubmitButton;
