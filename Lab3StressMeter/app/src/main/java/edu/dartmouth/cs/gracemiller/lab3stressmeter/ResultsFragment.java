@@ -7,29 +7,28 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GridViewFragment.OnFragmentInteractionListener} interface
+ * {@link ResultsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GridViewFragment#newInstance} factory method to
+ * Use the {@link ResultsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GridViewFragment extends Fragment {
+public class ResultsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public GridViewFragment() {
+    public ResultsFragment() {
         // Required empty public constructor
     }
 
+
     // TODO: Rename and change types and number of parameters
-    public static GridViewFragment newInstance() {
-        GridViewFragment fragment = new GridViewFragment();
+    public static ResultsFragment newInstance() {
+        ResultsFragment fragment = new ResultsFragment();
         return fragment;
     }
 
@@ -43,23 +42,7 @@ public class GridViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_grid_view, container, false);
-
-        //setContentView(view);
-
-//        GridViewFragment gridview = (GridViewFragment) view.findViewById(R.id.mygridview);
-//        gridview.setAdapter(new ImageAdapter(this));
-
-//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v,
-//                                    int position, long id) {
-//                Toast.makeText(HelloGridView.this, "" + position,
-//                        Toast.LENGTH_SHORT).show();
-////
-//
-
-        //delete this is for compiling
-        return view;
+        return inflater.inflate(R.layout.fragment_results, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,7 +74,7 @@ public class GridViewFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -48,7 +50,33 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mImageView = (ImageView) findViewById(R.id.imageView);
+        Fragment fragment = null;
+        fragment = new GridViewFragment();
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_holder, fragment).commit();
+
+//            // update selected item and title, then close the drawer
+//            mDrawerList.setItemChecked(position, true);
+//            mDrawerList.setSelection(position);
+//            setTitle(navMenuTitles[position]);
+//            mDrawerLayout.closeDrawer(mDrawerList);
+        } else {
+            // error in creating fragment
+            Log.d("MainActivity", "Error in creating fragment");
+        }
+//
+//        if(savedInstanceState == null) {
+//            FragmentManager manager = getFragmentManager();
+////            manager.beginTransaction().replace(R.id.fragment_holder).commit();
+//            FragmentTransaction transaction = manager.beginTransaction();
+//            transaction.replace(R.id.fragment_holder, GridViewFragment.newInstance());
+//            transaction.commit();
+//        }
+
+//        mImageView = (ImageView) findViewById(R.id.imageView);
 
         //gridViewFrag = findViewById(R.id.GridViewFragment);
 
@@ -120,15 +148,51 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         String title = getString(R.string.app_name);
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_grid) {
             // Handle the camera action
 //            fragment = new GridViewFragment();
 //            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //            ft.replace(R.id.mainFrame, fragment);
 //            ft.commit();
 
-        } else if (id == R.id.nav_gallery) {
+            Fragment mGridFragment = null;
+            mGridFragment = new GridViewFragment();
 
+//            if (fragment != null) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_holder, mGridFragment).commit();
+
+//            // update selected item and title, then close the drawer
+//            mDrawerList.setItemChecked(position, true);
+//            mDrawerList.setSelection(position);
+//            setTitle(navMenuTitles[position]);
+//            mDrawerLayout.closeDrawer(mDrawerList);
+//            } else {
+                // error in creating fragment
+                Log.d("MainActivity", "Error in creating fragment");
+//            }
+
+
+        } else if (id == R.id.nav_results) {
+
+            Fragment mResultsFragment = null;
+            mResultsFragment = new ResultsFragment();
+
+//            if (fragment != null) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_holder, mResultsFragment).commit();
+
+//            // update selected item and title, then close the drawer
+//            mDrawerList.setItemChecked(position, true);
+//            mDrawerList.setSelection(position);
+//            setTitle(navMenuTitles[position]);
+//            mDrawerLayout.closeDrawer(mDrawerList);
+//            } else {
+                // error in creating fragment
+                Log.d("MainActivity", "Error in creating fragment");
+//            }
         }
 
 //        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
