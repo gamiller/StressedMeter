@@ -3,6 +3,7 @@ package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -23,7 +24,7 @@ import java.util.Random;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GridViewFragment.OnFragmentInteractionListener} interface
+ *
  * to handle interaction events.
  * Use the {@link GridViewFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -54,20 +55,7 @@ public class GridViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_grid_view, container, false);
-        Button nextPhotobtn = (Button) view.findViewById(R.id.moreimage_button);
-        nextPhotobtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(GRID_NUM == 3){
-                    GRID_NUM = 1;
-                }else{GRID_NUM++;}
-                //setContentView(v);
-                GridView gridview = (GridView) view.findViewById(R.id.gridview);
-                gridview.setAdapter(new ImageAdapter(getActivity()));
-            }
-        });
+
             //super.onCreate(savedInstanceState);
             //setContentView(R.layout.activity_main);
 
@@ -75,7 +63,8 @@ public class GridViewFragment extends Fragment {
             GRID_NUM = rand.nextInt((3 - 1) + 1) + 1;
 
             GridView gridview = (GridView) view.findViewById(R.id.gridview);
-            gridview.setAdapter(new ImageAdapter(getActivity()));
+            final ImageAdapter myAdapter = new ImageAdapter(getActivity());
+            gridview.setAdapter(myAdapter);
 
             gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
@@ -90,6 +79,23 @@ public class GridViewFragment extends Fragment {
                     startActivityForResult(myIntent, 0);
                 }
             });
+
+//        Button nextPhotobtn = (Button) view.findViewById(R.id.moreimage_button);
+//        nextPhotobtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (GRID_NUM == 3) {
+//                    GRID_NUM = 1;
+//                } else {
+//                    GRID_NUM++;
+//                }
+//                //setContentView(v);
+//                GridView newgridview = (GridView) view.findViewById(R.id.gridview);
+//                newgridview.setAdapter(myAdapter);
+//
+//                //return gridview;
+//            }
+//        });
 
 
         //setContentView(view);
@@ -160,6 +166,7 @@ public class GridViewFragment extends Fragment {
 //                R.drawable.sample_6, R.drawable.sample_7
 //        };
     }
+
 
 
 

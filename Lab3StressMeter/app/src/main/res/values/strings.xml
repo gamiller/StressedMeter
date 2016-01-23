@@ -11,4 +11,8 @@
     <string name="submit_btn_txt">SUMBIT</string>
     <string name="cancel_btn_txt">CANCEL</string>
     <string name="csv_photo_path">stress_results.CSV</string>
+
+
+    <string name="gridview_title">Touch the image that best captures how stressed you feel right now</string>
+    <string name="title_activity_picture_choice">PictureChoiceActivity</string>
 </resources>

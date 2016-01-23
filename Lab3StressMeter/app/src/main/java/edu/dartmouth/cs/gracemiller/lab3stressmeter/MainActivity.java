@@ -206,12 +206,17 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-//    public void morePhotosClicked(View v){
-//        if(GRID_NUM == 3){
-//            GRID_NUM = 1;
-//        }else{GRID_NUM++;}
-//        //setContentView(v);
-//        GridView gridview = (GridView) v.findViewById(R.id.gridview);
-//        gridview.setAdapter(new ImageAdapter(getActivity()));
-//    }
+    public void morePhotosClicked(View v){
+        if(GRID_NUM == 3){
+            GRID_NUM = 1;
+        }else{GRID_NUM++;}
+        //setContentView(v);
+        Fragment mGridFragment = null;
+        mGridFragment = new GridViewFragment();
+
+//            if (fragment != null) {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_holder, mGridFragment).commit();
+    }
 }
