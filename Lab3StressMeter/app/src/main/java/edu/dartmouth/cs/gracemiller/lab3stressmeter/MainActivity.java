@@ -24,6 +24,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public int GRID_NUM = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -203,4 +205,13 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+//    public void morePhotosClicked(View v){
+//        if(GRID_NUM == 3){
+//            GRID_NUM = 1;
+//        }else{GRID_NUM++;}
+//        //setContentView(v);
+//        GridView gridview = (GridView) v.findViewById(R.id.gridview);
+//        gridview.setAdapter(new ImageAdapter(getActivity()));
+//    }
 }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,6 +30,10 @@ public class PhotoActivity extends Activity {
         Intent mData = getIntent();
         mStressScore = mData.getIntExtra("stess_score", 0);
         mPicID = mData.getIntExtra("drawable_id", 0);
+
+        ImageView image;
+        image = (ImageView) findViewById(R.id.imageView);
+        image.setImageResource(mPicID);
 
         //listener for cancel button
         mCancelButton = (Button) findViewById(R.id.cancel_btn_id);
