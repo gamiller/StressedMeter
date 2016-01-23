@@ -7,29 +7,55 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/gridview_title"
+            android:id="@+id/textView"
+            android:layout_gravity="center" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_gravity="left|top" />
 
-    <!--<GridView xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:id="@+id/mygridview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:columnWidth="90dp"-->
-        <!--android:numColumns="auto_fit"-->
-        <!--android:verticalSpacing="10dp"-->
-        <!--android:horizontalSpacing="10dp"-->
-        <!--android:stretchMode="columnWidth"-->
-        <!--android:gravity="center"-->
+        <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="372dp"
+            android:fitsSystemWindows="true"
+            tools:context="edu.dartmouth.cs.gracemiller.gridviewtest.MainActivity"
+            android:layout_weight="0.29">
+
+            <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numColumns="4"
+                android:verticalSpacing="0dp"
+                android:stretchMode="columnWidth"
+                android:gravity="center"
+                android:horizontalSpacing="0dp"
+                />
+
+            <!--android:columnWidth="90dp"-->
+            <!--android:horizontalSpacing="10dp"-->
+            <!--android:adjustViewBounds="true"-->
+
+        </android.support.design.widget.CoordinatorLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MORE IMAGES"
+            android:id="@+id/moreimage_button"
+            android:layout_gravity="center_horizontal"
+            android:onClick="morePhotosClicked"/>
+        <!--android:onClick="morePhotosClicked"-->
+    </LinearLayout>
         <!--/>-->
 
 </FrameLayout>
