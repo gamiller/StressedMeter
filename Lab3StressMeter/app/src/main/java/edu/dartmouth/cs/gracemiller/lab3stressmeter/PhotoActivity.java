@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,14 +53,15 @@ public class PhotoActivity extends Activity {
     }
 
     private void writeCSV(int time) {
-        File csvFile = new File(getString(R.string.csv_photo_path));
+        File stressData = new File(getString(R.string.csv_photo_path));
+
 //                Environment.getExternalStorageDirectory().getAbsolutePath()+
 //                File.separator + R.string.csv_photo_path);
 
-        if (csvFile.exists() == false) {
+        if (stressData.exists() == false) {
             try {
-                csvFile.mkdir();
-                FileWriter mWriter = new FileWriter(csvFile);
+                stressData.mkdir();
+                FileWriter mWriter = new FileWriter(stressData);
                 BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
                 mBuffWriter.write(time);
                 mBuffWriter.write(",");
@@ -70,9 +72,28 @@ public class PhotoActivity extends Activity {
                 e.printStackTrace();
             }
 
-
+        } else {
+            try {
+//                FileOutputStream writeStream = new FileOutputStream(stressData);
+//                writeStream.write(time);
+//                writeStream.write;
+                FileWriter mWriter = new FileWriter(stressData);
+                BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
+                mBuffWriter.write(time);
+                mBuffWriter.write(",");
+                mBuffWriter.write(mStressScore);
+                mBuffWriter.write(";");
+                mBuffWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 //
+
+
+
+
+
 //        if(file.exists()){
 //            try {
 //                FileWriter fileWriter  = new FileWriter(file);
@@ -85,6 +106,5 @@ public class PhotoActivity extends Activity {
 //        }
 
     }
-
 
 }

@@ -19,6 +19,8 @@ import android.view.ViewGroup;
  */
 public class ResultsFragment extends Fragment {
 
+//    List<int,int> values = new Arraylist<NameValuePair>();
+
     private OnFragmentInteractionListener mListener;
 
     public ResultsFragment() {
@@ -43,6 +45,7 @@ public class ResultsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_results, container, false);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -82,5 +85,11 @@ public class ResultsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void LoadData() {
+
+
+
     }
 }
