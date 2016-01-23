@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,37 +67,74 @@ public class PhotoActivity extends Activity {
 
         if (stressData.exists() == false) {
             try {
-                stressData.mkdir();
-                FileWriter mWriter = new FileWriter(stressData);
-                BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
-                mBuffWriter.write(time);
-                mBuffWriter.write(",");
-                mBuffWriter.write(mStressScore);
-                mBuffWriter.write(",");
-                mBuffWriter.close();
+                stressData.createNewFile();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-        } else {
-            try {
-//                FileOutputStream writeStream = new FileOutputStream(stressData);
-//                writeStream.write(time);
-//                writeStream.write;
-                FileWriter mWriter = new FileWriter(stressData);
-                BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
-                mBuffWriter.write(time);
-                mBuffWriter.write(",");
-                mBuffWriter.write(mStressScore);
-                mBuffWriter.write(";");
-                mBuffWriter.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        }
+
+        try {
+            FileWriter mWriter = new FileWriter(stressData);
+            BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
+            mBuffWriter.write(time);
+            mBuffWriter.write(",");
+            mBuffWriter.write(mStressScore);
+            mBuffWriter.write(",");
+            mBuffWriter.close();
+//        else {
+        }
+//            try {
+////                FileOutputStream writeStream = new FileOutputStream(stressData);
+////                writeStream.write(time);
+////                writeStream.write;
+//                FileWriter mWriter = new FileWriter(stressData);
+//                BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
+//                mBuffWriter.write(time);
+//                mBuffWriter.write(",");
+//                mBuffWriter.write(mStressScore);
+//                mBuffWriter.write(";");
+//                mBuffWriter.close();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
 //
 
+        File test_file = new File(getString(R.string.csv_photo_path));
 
+        if (test_file.exists()) {
+
+            BufferedReader br = null;
+            String response = null;
+
+            try {
+                String fpath = getString(R.string.csv_photo_path);
+
+                br = new BufferedReader(new FileReader(test_file));
+                int mCurInt = 0;
+                int flag = 0;
+                while ((mCurInt = br.read()) != -1) {
+
+                    if (mCurInt != 44 && mCurInt != 59) {
+                        if (flag == 0) {
+                            //assign time
+                        } else {
+                            //assign stress score
+                        }
+                    } else if (mCurInt == 44) {
+                        flag = 1;
+                    } else {
+                        flag = 0;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+        }
 
 
 
