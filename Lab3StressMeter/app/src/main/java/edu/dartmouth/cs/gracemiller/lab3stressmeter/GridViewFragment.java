@@ -34,7 +34,7 @@ import java.util.Random;
 public class GridViewFragment extends Fragment {
     public int GRID_NUM = 1;
     ImageAdapter myAdapter;
-
+    GridView gridview;
     //private OnFragmentInteractionListener mListener;
 
     public GridViewFragment() {
@@ -65,7 +65,7 @@ public class GridViewFragment extends Fragment {
             Random rand = new Random();
             GRID_NUM = rand.nextInt((3 - 1) + 1) + 1;
 
-            GridView gridview = (GridView) view.findViewById(R.id.gridview);
+            gridview = (GridView) view.findViewById(R.id.gridview);
             myAdapter = new ImageAdapter(getActivity());
             gridview.setAdapter(myAdapter);
 
@@ -92,22 +92,22 @@ public class GridViewFragment extends Fragment {
                 }
             });
 
-//        Button nextPhotobtn = (Button) view.findViewById(R.id.moreimage_button);
-//        nextPhotobtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (GRID_NUM == 3) {
-//                    GRID_NUM = 1;
-//                } else {
-//                    GRID_NUM++;
-//                }
-//                //setContentView(v);
-//                GridView newgridview = (GridView) view.findViewById(R.id.gridview);
-//                newgridview.setAdapter(myAdapter);
-//
-//                //return gridview;
-//            }
-//        });
+        Button nextPhotobtn = (Button) view.findViewById(R.id.moreimage_button);
+        nextPhotobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (GRID_NUM == 3) {
+                    GRID_NUM = 1;
+                } else {
+                    GRID_NUM++;
+                }
+                //setContentView(v);
+
+                gridview.setAdapter(myAdapter);
+
+                //return gridview;
+            }
+        });
 
 
         //setContentView(view);
