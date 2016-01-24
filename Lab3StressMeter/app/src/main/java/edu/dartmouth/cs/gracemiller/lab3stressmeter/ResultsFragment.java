@@ -271,15 +271,15 @@ public class ResultsFragment extends Fragment {
         TableRow tr_head = new TableRow(getActivity());
         tr_head.setId(0);
         tr_head.setBackgroundColor(Color.GRAY);
-        tr_head.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                TableLayout.LayoutParams.WRAP_CONTENT));
+//        tr_head.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+//                TableLayout.LayoutParams.WRAP_CONTENT));
 
         TextView timeHeader = new TextView(getActivity());
-        timeHeader.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT));
+//        timeHeader.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+//                TableRow.LayoutParams.WRAP_CONTENT));
         TextView stressHeader = new TextView(getActivity());
-        stressHeader.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT));
+//        stressHeader.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+//                TableRow.LayoutParams.WRAP_CONTENT));
 
         timeHeader.setText("Time");
         stressHeader.setText("Stress");
@@ -294,17 +294,17 @@ public class ResultsFragment extends Fragment {
         for (int i = 0; i < mTableList.size(); i++) {
             TableRow row = new TableRow(getActivity());
             row.setId(100 + i);
-            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT));
+//            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
+//                    TableLayout.LayoutParams.WRAP_CONTENT));
 
             TextView timeText = new TextView(getActivity());
-            timeText.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
+//            timeText.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+//                    TableRow.LayoutParams.WRAP_CONTENT));
             timeText.setId(200 + i);
 
             TextView stressText = new TextView(getActivity());
-            stressText.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
+//            stressText.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+//                    TableRow.LayoutParams.WRAP_CONTENT));
             timeText.setId(300 + i);
 
 
