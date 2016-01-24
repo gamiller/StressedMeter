@@ -15,6 +15,6 @@
 
     <string name="gridview_title">Touch the image that best captures how stressed you feel right now</string>
     <string name="title_activity_picture_choice">PictureChoiceActivity</string>
-    <string name="graph_title">A graph showing your Stress Levles</string>
+    <string name="graph_title">A graph showing your Stress Levels</string>
     <string name="table_title">Summary of Results</string>
 </resources>
