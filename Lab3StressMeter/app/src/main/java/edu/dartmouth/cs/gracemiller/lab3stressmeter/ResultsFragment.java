@@ -49,6 +49,8 @@ public class ResultsFragment extends Fragment {
 
 //    List<AxisValue> values = new Arraylist<AxisValue>();
 
+
+
     List<tableData> mTableList = new ArrayList<tableData>();
 
     Map<Integer,Integer> mstressMap = new HashMap<Integer,Integer>();
@@ -70,6 +72,45 @@ public class ResultsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        Intent intent = new Intent(getActivity(), LineChartView.class);
+//        startActivity(intent);
+            AlarmClass.vibrator.cancel();
+            AlarmClass.mediaPlayer.stop();
+
+//
+//        LineChartView chart = new LineChartView(8);
+//        LineChartData data = chart.getLineChartData();
+//        chart.setLineChartData();
+//        data.
+
+//        Axis xaxis = new Axis();
+
+//        List<AxisValue> axisValues = new ArrayList<AxisValue>();
+//        axisValues.add(new AxisValue(0, "some textt".toCharArray()));
+//        Axis xaxis = new Axis(axisValues);
+//        data.setAxisXBottom(xaxis);
+
+
+//
+//        List<AxisValue> mXValues = xaxis.getValues();
+//        AxisValue newAxisValue = new AxisValue();
+//        newAxisValue = (AxisValue) 2;
+////        mXValues.add(newAxisValue);
+//
+//
+////        mXValues.add()
+//        xaxis.setValues(mXValues);
+
+//        Axis xaxis = new Axis();
+
+//        data.setAxisXBottom(axisX);
+
+//        ChartData.setAxisXBottom(Axis axisX);
+//        ColumnChartData.setStacked(boolean isStacked);
+//        Line.setStrokeWidth(int strokeWidthDp);
+
+
 
     }
 
@@ -277,7 +318,7 @@ public class ResultsFragment extends Fragment {
             row.addView(timeText);
             row.addView(stressText);
             mStressTable.addView(row,i+1);
-//new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+//            new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
 
 //            break;

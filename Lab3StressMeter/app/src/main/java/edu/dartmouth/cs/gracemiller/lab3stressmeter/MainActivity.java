@@ -30,28 +30,23 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public int GRID_NUM = 1;
+    public boolean firstOpen = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PSMScheduler.setSchedule(this);
-
-        AlarmClass myAlarm = new AlarmClass();
-        myAlarm.startSound(this);
+        if(firstOpen) {
+            AlarmClass myAlarm = new AlarmClass();
+            myAlarm.startSound(this);
+        }
+        firstOpen = false;
 
 
 
         setContentView(R.layout.activity_main);
 
-//        Intent checkExit = getIntent();
-//        if (checkExit.getBooleanExtra("exit",false) == true) {
-//            Log.d("main", "exiting");
-//            Intent exitMain = new Intent(Intent.ACTION_MAIN);
-////            exitMain.addCategory(Intent.CATEGORY_BROWSABLE);
-//            exitMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            exitMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(exitMain);
-//        }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -130,6 +125,18 @@ public class MainActivity extends AppCompatActivity
 //
 //            }
 //    }
+                Intent checkExit = getIntent();
+        if (checkExit.getBooleanExtra("exit",false)) {
+                AlarmClass.mediaPlayer.stop();
+                AlarmClass.vibrator.cancel();
+//            Log.d("main", "exiting");
+//            Intent exitMain = new Intent(Intent.ACTION_MAIN);
+////            exitMain.addCategory(Intent.CATEGORY_BROWSABLE);
+//            exitMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            exitMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(exitMain);
+            finish();
+        }
 
     }
     @Override

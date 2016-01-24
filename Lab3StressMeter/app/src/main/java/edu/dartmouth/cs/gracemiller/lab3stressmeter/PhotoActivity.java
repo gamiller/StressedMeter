@@ -69,7 +69,9 @@ public class PhotoActivity extends Activity {
         finish();
 
         Intent exit_intent = new Intent(this,MainActivity.class);
+        exit_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         exit_intent.putExtra("exit", true);
+        //exit_intent.putExtra("not_first", true);
         startActivity(exit_intent);
     }
 
