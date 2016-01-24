@@ -49,12 +49,16 @@ public class ResultsFragment extends Fragment {
 
 //    List<AxisValue> values = new Arraylist<AxisValue>();
 
+
+
     List<tableData> mTableList = new ArrayList<tableData>();
 
     Map<Integer,Integer> mstressMap = new HashMap<Integer,Integer>();
     TableLayout mStressTable;
 
     private OnFragmentInteractionListener mListener;
+
+
 
     public ResultsFragment() {
         // Required empty public constructor
@@ -72,7 +76,8 @@ public class ResultsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 //        Intent intent = new Intent(getActivity(), LineChartView.class);
 //        startActivity(intent);
-
+            AlarmClass.vibrator.cancel();
+            AlarmClass.mediaPlayer.stop();
 
 //
 //        LineChartView chart = new LineChartView(8);
