@@ -1,6 +1,7 @@
 package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +32,11 @@ public class PhotoActivity extends Activity {
         setContentView(R.layout.activity_photo);
 
         Intent mData = getIntent();
-        mStressScore = mData.getIntExtra("stess_score", 0);
+        mStressScore = mData.getIntExtra("stress_score", 0);
         mPicID = mData.getIntExtra("drawable_id", 0);
+
+        Log.d("photoAct", "stress " + mStressScore);
+
 
         ImageView image;
         image = (ImageView) findViewById(R.id.imageView);
@@ -42,13 +46,17 @@ public class PhotoActivity extends Activity {
         mCancelButton = (Button) findViewById(R.id.cancel_btn_id);
         mSubmitButton = (Button) findViewById(R.id.submit_btn_id);
 
+
+
+
     }
 
-    public void handleCancel() {
+    // how do we finish for the entire app?
+    public void handleCancel(View v) {
         finish();
     }
 
-    public void handleSubmit() {
+    public void handleSubmit(View v) {
 
         //handle and save into a csv file
 
@@ -57,11 +65,17 @@ public class PhotoActivity extends Activity {
 //        String ts = tsLong.toString();
         writeCSV(mTimeSec);
 
+        //need to exit the entire app
+        finish();
 
+        Intent exit_intent = new Intent(this,MainActivity.class);
+        exit_intent.putExtra("exit", true);
+        startActivity(exit_intent);
     }
 
     private void writeCSV(int time) {
-        File stressData = new File(getString(R.string.csv_photo_path));
+
+        File stressData = new File(getFilesDir(),getString(R.string.photo_path));
 
         if (stressData.exists() == false) {
             try {
@@ -69,72 +83,30 @@ public class PhotoActivity extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-        }
-
-        try {
-            FileWriter mWriter = new FileWriter(stressData);
-            BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
-            mBuffWriter.write(time);
-            mBuffWriter.write(",");
-            mBuffWriter.write(mStressScore);
-            mBuffWriter.write(",");
-            mBuffWriter.close();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-        //            try {
-////                FileOutputStream writeStream = new FileOutputStream(stressData);
-////                writeStream.write(time);
-////                writeStream.write;
-//                FileWriter mWriter = new FileWriter(stressData);
-//                BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
-//                mBuffWriter.write(time);
-//                mBuffWriter.write(",");
-//                mBuffWriter.write(mStressScore);
-//                mBuffWriter.write(";");
-//                mBuffWriter.close();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-
-        File test_file = new File(getString(R.string.csv_photo_path));
-
-
-        if (test_file.exists()) {
-
-            BufferedReader buffRead = null;
-
             try {
-                String fpath = getString(R.string.csv_photo_path);
-
-                buffRead = new BufferedReader(new FileReader(test_file));
-                int mCurInt = 0;
-                int flag = 0;
-                while ((mCurInt = buffRead.read()) != -1) {
-
-                    if (mCurInt != 44 && mCurInt != 59) {
-                        if (flag == 0) {
-                            //assign time
-                            Log.d("photoAct", "time");
-                        } else {
-                            //assign stress score
-                            Log.d("photoAct", "stress");
-                        }
-                    } else if (mCurInt == 44) {
-                        flag = 1;
-                    } else {
-                        flag = 0;
-                    }
-                }
-            } catch (IOException e) {
+                FileWriter mWriter = new FileWriter(stressData);
+                BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
+                mBuffWriter.write(time);
+                mBuffWriter.write(",");
+                mBuffWriter.write(mStressScore);
+                mBuffWriter.write(",");
+                mBuffWriter.close();
+            } catch(IOException e) {
                 e.printStackTrace();
             }
 
-
-
+        } else {
+            try {
+                FileWriter mWriter = new FileWriter(stressData,true);
+                BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
+                mBuffWriter.write(time);
+                mBuffWriter.write(",");
+                mBuffWriter.write(mStressScore);
+                mBuffWriter.write(",");
+                mBuffWriter.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }

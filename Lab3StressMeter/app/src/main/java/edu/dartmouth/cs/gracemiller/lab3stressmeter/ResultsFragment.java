@@ -5,12 +5,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
@@ -30,7 +37,9 @@ import lecho.lib.hellocharts.view.LineChartView;
  */
 public class ResultsFragment extends Fragment {
 
-//    List<int,int> values = new Arraylist<NameValuePair>();
+//    List<AxisValue> values = new Arraylist<AxisValue>();
+    Map<Integer,Integer> stressMap = new HashMap<Integer,Integer>();
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -51,18 +60,20 @@ public class ResultsFragment extends Fragment {
 //        Intent intent = new Intent(getActivity(), LineChartView.class);
 //        startActivity(intent);
 
+        LoadData();
 
-        LineChartView chart = new LineChartView(8);
-        LineChartData data = chart.getLineChartData();
+//
+//        LineChartView chart = new LineChartView(8);
+//        LineChartData data = chart.getLineChartData();
 //        chart.setLineChartData();
 //        data.
 
 //        Axis xaxis = new Axis();
 
-        List<AxisValue> axisValues = new ArrayList<AxisValue>();
-        axisValues.add(new AxisValue(0, "some textt".toCharArray()));
-        Axis xaxis = new Axis(axisValues);
-        data.setAxisXBottom(xaxis);
+//        List<AxisValue> axisValues = new ArrayList<AxisValue>();
+//        axisValues.add(new AxisValue(0, "some textt".toCharArray()));
+//        Axis xaxis = new Axis(axisValues);
+//        data.setAxisXBottom(xaxis);
 
 
 //
@@ -136,6 +147,45 @@ public class ResultsFragment extends Fragment {
 
     private void LoadData() {
 
+        File mReadFile = new File(getActivity().getFilesDir(),getString(R.string.photo_path));
+
+        if (mReadFile.exists()) {
+
+            BufferedReader buffRead = null;
+
+            try {
+                buffRead = new BufferedReader(new FileReader(mReadFile));
+                int mCurInt = 0;
+                int flag = 0;
+                int mTimeKey = 0;
+                int mStressValue = 0;
+
+
+                while ((mCurInt = buffRead.read()) != -1) {
+
+                    if (mCurInt != 44 && mCurInt != 59) {
+                        if (flag == 0) {
+                            //assign time
+                            mTimeKey = mCurInt;
+//                            Log.d("REsults", "time " + mTimeKey);
+                        } else {
+                            //assign stress score
+                            mStressValue = mCurInt;
+//                            Log.d("Results", "stress " + mStressValue);
+                            //adding values to a map for plotting
+                            stressMap.put(mTimeKey,mStressValue);
+                        }
+                    } else if (mCurInt == 44) {
+                        flag = 1;
+                    } else {
+                        flag = 0;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
 
 
     }

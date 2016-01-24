@@ -3,6 +3,7 @@ package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,6 +31,16 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        Intent checkExit = getIntent();
+//        if (checkExit.getBooleanExtra("exit",false) == true) {
+//            Log.d("main", "exiting");
+//            Intent exitMain = new Intent(Intent.ACTION_MAIN);
+////            exitMain.addCategory(Intent.CATEGORY_BROWSABLE);
+//            exitMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            exitMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(exitMain);
+//        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

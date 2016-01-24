@@ -7,6 +7,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,9 @@ public class GridViewFragment extends Fragment {
                     //Toast.makeText().show();
 
                     int stressScore = getStressScore(position);
+
+                    Log.d("photoAct", "score " + stressScore);
+
 
                     Intent myIntent = new Intent(getActivity(), PhotoActivity.class);
                     myIntent.putExtra("drawable_id", PSM.getGridById(GRID_NUM)[position]);
@@ -174,7 +178,6 @@ public class GridViewFragment extends Fragment {
     //look up table function for the stress score
     private int getStressScore(int position) {
         int value = 0;
-//        6,8,14,16
 
         if (position == 0) {
             value = 6;
@@ -209,6 +212,8 @@ public class GridViewFragment extends Fragment {
         } else {
             value = 11;
         }
+
+
 
         return value;
 
