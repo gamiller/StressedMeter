@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lecho.lib.hellocharts.model.Axis;
@@ -47,22 +48,32 @@ public class ResultsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(getActivity(), LineChartView.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity(), LineChartView.class);
+//        startActivity(intent);
 
 
-        LineChartView chart = new LineChartView(getContext());
+        LineChartView chart = new LineChartView(8);
         LineChartData data = chart.getLineChartData();
 //        chart.setLineChartData();
 //        data.
 
-        Axis xaxis = new Axis();
+//        Axis xaxis = new Axis();
 
-        List<AxisValue> mXValues = xaxis.getValues();
+        List<AxisValue> axisValues = new ArrayList<AxisValue>();
+        axisValues.add(new AxisValue(0, "some textt".toCharArray()));
+        Axis xaxis = new Axis(axisValues);
+        data.setAxisXBottom(xaxis);
+
+
+//
+//        List<AxisValue> mXValues = xaxis.getValues();
 //        AxisValue newAxisValue = new AxisValue();
-//        newAxisValue = 2;
-//        mXValues.add(newAxisValue);
-        xaxis.setValues(mXValues);
+//        newAxisValue = (AxisValue) 2;
+////        mXValues.add(newAxisValue);
+//
+//
+////        mXValues.add()
+//        xaxis.setValues(mXValues);
 
 //        Axis xaxis = new Axis();
 

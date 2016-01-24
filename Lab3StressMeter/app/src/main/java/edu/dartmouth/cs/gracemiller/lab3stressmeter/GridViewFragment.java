@@ -71,8 +71,11 @@ public class GridViewFragment extends Fragment {
                                         int position, long id) {
                     //Toast.makeText().show();
 
+                    int stressScore = getStressScore(position);
+
                     Intent myIntent = new Intent(getActivity(), PhotoActivity.class);
                     myIntent.putExtra("drawable_id", PSM.getGridById(GRID_NUM)[position]);
+                    myIntent.putExtra("stress_score",stressScore);
 //                Bundle bundle = new Bundle();
 //                bundle.putInt("imageid", PSM.getGridById(GRID_NUM)[position]);
 //                myIntent.putExtras(bundle);
@@ -167,6 +170,49 @@ public class GridViewFragment extends Fragment {
 //        };
     }
 
+
+    //look up table function for the stress score
+    private int getStressScore(int position) {
+        int value = 0;
+//        6,8,14,16
+
+        if (position == 0) {
+            value = 6;
+        } else if (position == 1) {
+            value = 8;
+        } else if (position == 2) {
+            value = 14;
+        } else if (position == 3) {
+            value = 16;
+        } else if (position == 4) {
+            value = 5;
+        } else if (position == 5) {
+            value = 7;
+        } else if (position == 6) {
+            value = 13;
+        } else if (position == 7) {
+            value = 15;
+        } else if (position == 8) {
+            value = 2;
+        } else if (position == 9) {
+            value = 4;
+        } else if (position == 10) {
+            value = 10;
+        } else if (position == 11) {
+            value = 12;
+        } else if (position == 12) {
+            value = 1;
+        } else if (position == 13) {
+            value = 3;
+        } else if (position == 14) {
+            value = 9;
+        } else {
+            value = 11;
+        }
+
+        return value;
+
+    }
 
 
 
