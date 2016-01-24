@@ -87,9 +87,9 @@ public class PhotoActivity extends Activity {
                 FileWriter mWriter = new FileWriter(stressData);
                 BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
                 mBuffWriter.write(time);
-                mBuffWriter.write(",");
+                mBuffWriter.write(44);
                 mBuffWriter.write(mStressScore);
-                mBuffWriter.write(",");
+                mBuffWriter.write(47);
                 mBuffWriter.close();
             } catch(IOException e) {
                 e.printStackTrace();
@@ -100,9 +100,9 @@ public class PhotoActivity extends Activity {
                 FileWriter mWriter = new FileWriter(stressData,true);
                 BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
                 mBuffWriter.write(time);
-                mBuffWriter.write(",");
+                mBuffWriter.write(44);
                 mBuffWriter.write(mStressScore);
-                mBuffWriter.write(",");
+                mBuffWriter.write(47);
                 mBuffWriter.close();
             } catch(IOException e) {
                 e.printStackTrace();
