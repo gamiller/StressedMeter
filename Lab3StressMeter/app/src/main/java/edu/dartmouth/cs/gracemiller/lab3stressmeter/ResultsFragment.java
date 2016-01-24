@@ -73,43 +73,9 @@ public class ResultsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Intent intent = new Intent(getActivity(), LineChartView.class);
-//        startActivity(intent);
+            // Stops the media and vibrator alarm
             AlarmClass.vibrator.cancel();
             AlarmClass.mediaPlayer.stop();
-
-//
-//        LineChartView chart = new LineChartView(8);
-//        LineChartData data = chart.getLineChartData();
-//        chart.setLineChartData();
-//        data.
-
-//        Axis xaxis = new Axis();
-
-//        List<AxisValue> axisValues = new ArrayList<AxisValue>();
-//        axisValues.add(new AxisValue(0, "some textt".toCharArray()));
-//        Axis xaxis = new Axis(axisValues);
-//        data.setAxisXBottom(xaxis);
-
-
-//
-//        List<AxisValue> mXValues = xaxis.getValues();
-//        AxisValue newAxisValue = new AxisValue();
-//        newAxisValue = (AxisValue) 2;
-////        mXValues.add(newAxisValue);
-//
-//
-////        mXValues.add()
-//        xaxis.setValues(mXValues);
-
-//        Axis xaxis = new Axis();
-
-//        data.setAxisXBottom(axisX);
-
-//        ChartData.setAxisXBottom(Axis axisX);
-//        ColumnChartData.setStacked(boolean isStacked);
-//        Line.setStrokeWidth(int strokeWidthDp);
-
 
 
     }
@@ -265,49 +231,43 @@ public class ResultsFragment extends Fragment {
 
     }
 
-    // need to iterate through the map and populate the table
+    //places all the data in a table
     private void populateTable() {
 
+        // create the header row
         TableRow tr_head = new TableRow(getActivity());
         tr_head.setId(0);
         tr_head.setBackgroundColor(Color.GRAY);
-        tr_head.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                TableLayout.LayoutParams.WRAP_CONTENT));
 
+        // create text view columns
         TextView timeHeader = new TextView(getActivity());
-        timeHeader.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT));
         TextView stressHeader = new TextView(getActivity());
-        stressHeader.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT));
 
+        // set titles of columns
         timeHeader.setText("Time");
         stressHeader.setText("Stress");
 
+        // add columns to header row
         tr_head.addView(timeHeader);
         tr_head.addView(stressHeader);
 
+        // add row to table
         mStressTable.addView(tr_head,0);
 
-        Log.d("size","" + mTableList.size());
-
+        // iterate through the table array list and create rows
         for (int i = 0; i < mTableList.size(); i++) {
+
+            //set up row
             TableRow row = new TableRow(getActivity());
             row.setId(100 + i);
-            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT));
 
+            // set up text views for columns
             TextView timeText = new TextView(getActivity());
-            timeText.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
             timeText.setId(200 + i);
-
             TextView stressText = new TextView(getActivity());
-            stressText.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
             timeText.setId(300 + i);
 
-
+            // enter values for textviews
             timeText.setText("" + mTableList.get(i).getTime());
             stressText.setText("" + mTableList.get(i).getStress());
 
@@ -315,13 +275,10 @@ public class ResultsFragment extends Fragment {
             Log.d("here", "" + mTableList.get(i).getTime() + " " + mTableList.get(i).getStress());
             Log.d("i", "i = " + i);
 
+            // add columns to row and row to table
             row.addView(timeText);
             row.addView(stressText);
             mStressTable.addView(row,i+1);
-//            new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
-
-//            break;
 
         }
 

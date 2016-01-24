@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -37,15 +37,16 @@
             android:textSize="18dp" />
 
         <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:shrinkColumns="*"
-            android:stretchColumns="*"
-            android:id="@+id/table_id">
-        </TableLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:shrinkColumns="*"
+                android:stretchColumns="*"
+                android:id="@+id/table_id"
+                android:minHeight="100dp">
+            </TableLayout>
         </ScrollView>
 
 
