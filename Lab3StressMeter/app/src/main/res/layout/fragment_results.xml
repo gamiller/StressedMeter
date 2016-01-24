@@ -6,10 +6,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="300dp"
+        android:orientation="vertical">
         <lecho.lib.hellocharts.view.ColumnChartView
             android:id="@+id/chart"
+            android:layout_width="wrap_content"
+            android:layout_height="277dp" />
+
+        <TableLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="242dp"
+            android:id="@+id/table_id">
+
+
+        </TableLayout>
     </LinearLayout>
+
+
+    <!--android:shrinkColumns="*"-->
+    <!--android:stretchColumns="*"-->
+    <!--<TextView-->
+        <!--android:text="Time"-->
+        <!--android:textSize="12dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_column="0"-->
+        <!--android:layout_span="1" />-->
+    <!--<TextView-->
+        <!--android:text="Stress"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_column="13" />-->
+
 </FrameLayout>

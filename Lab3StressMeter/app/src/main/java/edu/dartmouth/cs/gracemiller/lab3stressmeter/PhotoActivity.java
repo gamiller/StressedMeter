@@ -89,7 +89,7 @@ public class PhotoActivity extends Activity {
                 mBuffWriter.write(time);
                 mBuffWriter.write(",");
                 mBuffWriter.write(mStressScore);
-                mBuffWriter.write(",");
+                mBuffWriter.write(".");
                 mBuffWriter.close();
             } catch(IOException e) {
                 e.printStackTrace();
@@ -102,7 +102,7 @@ public class PhotoActivity extends Activity {
                 mBuffWriter.write(time);
                 mBuffWriter.write(",");
                 mBuffWriter.write(mStressScore);
-                mBuffWriter.write(",");
+                mBuffWriter.write("/");
                 mBuffWriter.close();
             } catch(IOException e) {
                 e.printStackTrace();

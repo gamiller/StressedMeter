@@ -2,13 +2,18 @@ package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,8 +21,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
@@ -38,8 +45,11 @@ import lecho.lib.hellocharts.view.LineChartView;
 public class ResultsFragment extends Fragment {
 
 //    List<AxisValue> values = new Arraylist<AxisValue>();
-    Map<Integer,Integer> stressMap = new HashMap<Integer,Integer>();
 
+    List<tableData> mTableList = new ArrayList<tableData>();
+
+    Map<Integer,Integer> mstressMap = new HashMap<Integer,Integer>();
+    TableLayout mStressTable;
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,7 +70,6 @@ public class ResultsFragment extends Fragment {
 //        Intent intent = new Intent(getActivity(), LineChartView.class);
 //        startActivity(intent);
 
-        LoadData();
 
 //
 //        LineChartView chart = new LineChartView(8);
@@ -102,7 +111,16 @@ public class ResultsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_results, container, false);
+        View v = inflater.inflate(R.layout.fragment_results, container, false);
+
+        LoadData();
+
+        mStressTable = (TableLayout) v.findViewById(R.id.table_id);
+
+        populateTable();
+
+
+        return v;
 
     }
 
@@ -159,26 +177,43 @@ public class ResultsFragment extends Fragment {
                 int flag = 0;
                 int mTimeKey = 0;
                 int mStressValue = 0;
+                tableData entry = new tableData(0,0);
+                char sepOne = 'a';
+                char sepTwo = 'b';
 
 
                 while ((mCurInt = buffRead.read()) != -1) {
+                    if (mCurInt == (int) sepOne) {
+                        Log.d("REsults", "true ");
+                    }
 
-                    if (mCurInt != 44 && mCurInt != 59) {
+
+                    if (mCurInt != 44 && mCurInt != 47) {
                         if (flag == 0) {
                             //assign time
                             mTimeKey = mCurInt;
-//                            Log.d("REsults", "time " + mTimeKey);
+                            Log.d("REsults", "time " + mTimeKey);
+
                         } else {
                             //assign stress score
                             mStressValue = mCurInt;
-//                            Log.d("Results", "stress " + mStressValue);
+
+                            Log.d("Results", "stress " + mStressValue);
                             //adding values to a map for plotting
-                            stressMap.put(mTimeKey,mStressValue);
+                            entry.setTime(mTimeKey);
+                            entry.setStress(mStressValue);
+
+
+                            mTableList.add(entry);
+//                            mstressMap.put(mTimeKey,mStressValue);
                         }
                     } else if (mCurInt == 44) {
-                        flag = 1;
-                    } else {
+                        Log.d("comma","comma");
                         flag = 0;
+                    } else {
+                        Log.d("semi","semi");
+
+                        flag = 1;
                     }
                 }
             } catch (IOException e) {
@@ -189,4 +224,63 @@ public class ResultsFragment extends Fragment {
 
 
     }
+
+    // need to iterate through the map and populate the table
+    private void populateTable() {
+
+        Log.d("size","" + mTableList.size());
+
+        for (int i = 0; i< mTableList.size(); i++) {
+            TableRow row = new TableRow(getActivity());
+            row.setId(100+i);
+            row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.WRAP_CONTENT));
+            TextView timeText = new TextView(getActivity());
+            timeText.setId(200+i);
+            TextView stressText = new TextView(getActivity());
+            timeText.setId(300 + i);
+
+            timeText.setText("" + mTableList.get(i).getTime());
+            stressText.setText("" + mTableList.get(i).getStress());
+
+
+
+            Log.d("here", "" + mTableList.get(i).getTime() + " " + mTableList.get(i).getStress());
+
+            row.addView(timeText);
+            row.addView(stressText);
+            mStressTable.addView(row,i);
+
+//            break;
+
+        }
+
+    }
+
+    public class tableData {
+
+        int mTime;
+        int mStress;
+
+        public tableData(int time, int stress){
+        }
+
+        public void setTime(int time) {
+            mTime = time;
+        }
+
+        public void setStress(int stress) {
+            mStress = stress;
+        }
+
+        public int getTime() {
+            return mTime;
+        }
+
+        public int getStress() {
+            return mStress;
+        }
+
+    }
+
 }
