@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -62,9 +63,6 @@ public class PhotoActivity extends Activity {
     private void writeCSV(int time) {
         File stressData = new File(getString(R.string.csv_photo_path));
 
-//                Environment.getExternalStorageDirectory().getAbsolutePath()+
-//                File.separator + R.string.csv_photo_path);
-
         if (stressData.exists() == false) {
             try {
                 stressData.createNewFile();
@@ -82,9 +80,10 @@ public class PhotoActivity extends Activity {
             mBuffWriter.write(mStressScore);
             mBuffWriter.write(",");
             mBuffWriter.close();
-//        else {
+        } catch(IOException e) {
+            e.printStackTrace();
         }
-//            try {
+        //            try {
 ////                FileOutputStream writeStream = new FileOutputStream(stressData);
 ////                writeStream.write(time);
 ////                writeStream.write;
@@ -98,29 +97,31 @@ public class PhotoActivity extends Activity {
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
-        }
+//        }
 //
 
         File test_file = new File(getString(R.string.csv_photo_path));
 
+
         if (test_file.exists()) {
 
-            BufferedReader br = null;
-            String response = null;
+            BufferedReader buffRead = null;
 
             try {
                 String fpath = getString(R.string.csv_photo_path);
 
-                br = new BufferedReader(new FileReader(test_file));
+                buffRead = new BufferedReader(new FileReader(test_file));
                 int mCurInt = 0;
                 int flag = 0;
-                while ((mCurInt = br.read()) != -1) {
+                while ((mCurInt = buffRead.read()) != -1) {
 
                     if (mCurInt != 44 && mCurInt != 59) {
                         if (flag == 0) {
                             //assign time
+                            Log.d("photoAct", "time");
                         } else {
                             //assign stress score
+                            Log.d("photoAct", "stress");
                         }
                     } else if (mCurInt == 44) {
                         flag = 1;
@@ -135,19 +136,6 @@ public class PhotoActivity extends Activity {
 
 
         }
-
-
-
-//        if(file.exists()){
-//            try {
-//                FileWriter fileWriter  = new FileWriter(file);
-//                BufferedWriter bfWriter = new BufferedWriter(fileWriter);
-//                bfWriter.write("Text Data");
-//                bfWriter.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
 
     }
 
