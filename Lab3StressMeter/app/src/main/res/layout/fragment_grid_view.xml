@@ -55,6 +55,7 @@
             android:layout_gravity="center_horizontal"
             android:onClick="morePhotosClicked"/>
         <!--android:onClick="morePhotosClicked"-->
+        <!--android:onClick="morePhotosClicked"-->
     </LinearLayout>
         <!--/>-->
 

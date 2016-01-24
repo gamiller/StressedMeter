@@ -11,14 +11,20 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PhotoActivity"></activity>
+        <activity android:name=".PhotoActivity"
+            android:screenOrientation="portrait"></activity>
+        <receiver android:name=".EMAAlarmReceiver">
+        </receiver>
     </application>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    helloo this is a
 
 </manifest>

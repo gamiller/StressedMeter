@@ -4,6 +4,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,6 +34,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PSMScheduler.setSchedule(this);
+
+        AlarmClass myAlarm = new AlarmClass();
+        myAlarm.startSound(this);
+
+
+
         setContentView(R.layout.activity_main);
 
 //        Intent checkExit = getIntent();
@@ -218,6 +229,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void morePhotosClicked(View v){
+        AlarmClass.mediaPlayer.stop();
+        AlarmClass.vibrator.cancel();
+
         if(GRID_NUM == 3){
             GRID_NUM = 1;
         }else{GRID_NUM++;}

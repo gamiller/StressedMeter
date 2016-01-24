@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -32,6 +33,7 @@ import java.util.Random;
  */
 public class GridViewFragment extends Fragment {
     public int GRID_NUM = 1;
+    ImageAdapter myAdapter;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -64,14 +66,17 @@ public class GridViewFragment extends Fragment {
             GRID_NUM = rand.nextInt((3 - 1) + 1) + 1;
 
             GridView gridview = (GridView) view.findViewById(R.id.gridview);
-            final ImageAdapter myAdapter = new ImageAdapter(getActivity());
+            myAdapter = new ImageAdapter(getActivity());
             gridview.setAdapter(myAdapter);
 
             gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
                                         int position, long id) {
                     //Toast.makeText().show();
-
+//                    AlarmClass myAlarm = new AlarmClass();
+//                    myAlarm.stopSound();
+                    AlarmClass.mediaPlayer.stop();
+                    AlarmClass.vibrator.cancel();
                     int stressScore = getStressScore(position);
 
                     Log.d("photoAct", "score " + stressScore);
