@@ -8,18 +8,44 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical">
-        <lecho.lib.hellocharts.view.ColumnChartView
-            android:id="@+id/chart"
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="277dp" />
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:text="@string/graph_title"
+            android:textSize="18dp" />
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/chart_id"
+            android:layout_width="wrap_content"
+            android:layout_height="210dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/table_title"
+            android:padding="10dp"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18dp" />
 
         <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="242dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:shrinkColumns="*"
+            android:stretchColumns="*"
             android:id="@+id/table_id">
 
 
         </TableLayout>
+
     </LinearLayout>
 
 
