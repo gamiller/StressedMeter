@@ -70,43 +70,6 @@ public class ResultsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Intent intent = new Intent(getActivity(), LineChartView.class);
-//        startActivity(intent);
-
-
-//
-//        LineChartView chart = new LineChartView(8);
-//        LineChartData data = chart.getLineChartData();
-//        chart.setLineChartData();
-//        data.
-
-//        Axis xaxis = new Axis();
-
-//        List<AxisValue> axisValues = new ArrayList<AxisValue>();
-//        axisValues.add(new AxisValue(0, "some textt".toCharArray()));
-//        Axis xaxis = new Axis(axisValues);
-//        data.setAxisXBottom(xaxis);
-
-
-//
-//        List<AxisValue> mXValues = xaxis.getValues();
-//        AxisValue newAxisValue = new AxisValue();
-//        newAxisValue = (AxisValue) 2;
-////        mXValues.add(newAxisValue);
-//
-//
-////        mXValues.add()
-//        xaxis.setValues(mXValues);
-
-//        Axis xaxis = new Axis();
-
-//        data.setAxisXBottom(axisX);
-
-//        ChartData.setAxisXBottom(Axis axisX);
-//        ColumnChartData.setStacked(boolean isStacked);
-//        Line.setStrokeWidth(int strokeWidthDp);
-
-
 
     }
 
@@ -116,13 +79,16 @@ public class ResultsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_results, container, false);
 
-
-
-
+        //load data from file into list
         LoadData();
+
+        // extract table from view
         mStressTable = (TableLayout) v.findViewById(R.id.table_id);
 
+        //create the graph
         createGraph(v);
+
+        //create the table
         populateTable();
 
 
@@ -264,8 +230,8 @@ public class ResultsFragment extends Fragment {
         TableRow tr_head = new TableRow(getActivity());
         tr_head.setId(0);
         tr_head.setBackgroundColor(Color.GRAY);
-        tr_head.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
-                TableRow.LayoutParams.WRAP_CONTENT));
+        tr_head.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                TableLayout.LayoutParams.WRAP_CONTENT));
 
         TextView timeHeader = new TextView(getActivity());
         timeHeader.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
@@ -287,8 +253,8 @@ public class ResultsFragment extends Fragment {
         for (int i = 0; i < mTableList.size(); i++) {
             TableRow row = new TableRow(getActivity());
             row.setId(100 + i);
-            row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
+            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT));
 
             TextView timeText = new TextView(getActivity());
             timeText.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
@@ -311,7 +277,7 @@ public class ResultsFragment extends Fragment {
             row.addView(timeText);
             row.addView(stressText);
             mStressTable.addView(row,i+1);
-//            new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+//new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
 
 //            break;

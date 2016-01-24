@@ -63,7 +63,7 @@ public class PhotoActivity extends Activity {
         //long or int?
         int mTimeSec = (int) System.currentTimeMillis() / 1000;
 //        String ts = tsLong.toString();
-        writeCSV(mTimeSec);
+        writeFile(mTimeSec);
 
         //need to exit the entire app
         finish();
@@ -73,7 +73,7 @@ public class PhotoActivity extends Activity {
         startActivity(exit_intent);
     }
 
-    private void writeCSV(int time) {
+    private void writeFile(int time) {
 
         File stressData = new File(getFilesDir(),getString(R.string.photo_path));
 
