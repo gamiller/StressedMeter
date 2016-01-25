@@ -1,26 +1,19 @@
 package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+// handles the pop-up activity for collecting information
 public class PhotoActivity extends Activity {
 
     int mStressScore, mPicID;
@@ -31,60 +24,58 @@ public class PhotoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
 
+        // receive data from main activity
         Intent mData = getIntent();
         mStressScore = mData.getIntExtra("stress_score", 0);
         mPicID = mData.getIntExtra("drawable_id", 0);
 
-        Log.d("photoAct", "stress " + mStressScore);
-
-
+        // set up image view
         ImageView image;
         image = (ImageView) findViewById(R.id.imageView);
         image.setImageResource(mPicID);
 
-        //listener for cancel button
+        // grab buttons
         mCancelButton = (Button) findViewById(R.id.cancel_btn_id);
         mSubmitButton = (Button) findViewById(R.id.submit_btn_id);
 
-
-
-
     }
 
-    // how do we finish for the entire app?
+    // return to main activity when pressed
     public void handleCancel(View v) {
         finish();
     }
 
+    // exit application when pressed
     public void handleSubmit(View v) {
 
-        //handle and save into a csv file
-
-        //long or int?
+        // grab current time
         int mTimeSec = (int) System.currentTimeMillis() / 1000;
-//        String ts = tsLong.toString();
+
+        // write time and stress value to file
         writeFile(mTimeSec);
 
-        //need to exit the entire app
-        finish();
-
+        //exit app
         Intent exit_intent = new Intent(this,MainActivity.class);
         exit_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         exit_intent.putExtra("exit", true);
-        //exit_intent.putExtra("not_first", true);
         startActivity(exit_intent);
     }
 
+    // write values to a file
     private void writeFile(int time) {
 
+        // get file path
         File stressData = new File(getFilesDir(),getString(R.string.photo_path));
 
+        // if file exists
         if (stressData.exists() == false) {
             try {
                 stressData.createNewFile();
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            // try writing time and stress to a file
             try {
                 FileWriter mWriter = new FileWriter(stressData);
                 BufferedWriter mBuffWriter = new BufferedWriter(mWriter);
@@ -98,6 +89,8 @@ public class PhotoActivity extends Activity {
             }
 
         } else {
+
+            // if file exists append to file
             try {
                 FileWriter mWriter = new FileWriter(stressData,true);
                 BufferedWriter mBuffWriter = new BufferedWriter(mWriter);

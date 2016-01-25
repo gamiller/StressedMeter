@@ -235,20 +235,5 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void morePhotosClicked(View v){
-        AlarmClass.mediaPlayer.stop();
-        AlarmClass.vibrator.cancel();
 
-        if(GRID_NUM == 3){
-            GRID_NUM = 1;
-        }else{GRID_NUM++;}
-        //setContentView(v);
-        Fragment mGridFragment = null;
-        mGridFragment = new GridViewFragment();
-
-//            if (fragment != null) {
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_holder, mGridFragment).commit();
-    }
 }
