@@ -52,8 +52,7 @@
             android:layout_height="wrap_content"
             android:text="MORE IMAGES"
             android:id="@+id/moreimage_button"
-            android:layout_gravity="center_horizontal"
-            android:onClick="morePhotosClicked"/>
+            android:layout_gravity="center_horizontal" />
         <!--android:onClick="morePhotosClicked"-->
         <!--android:onClick="morePhotosClicked"-->
     </LinearLayout>

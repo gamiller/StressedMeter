@@ -15,15 +15,19 @@ public class AlarmClass {
     static MediaPlayer mediaPlayer;
     static Vibrator vibrator;
 
+    //start the vibration and sound to play until photo is chosen
     public void startSound(Context context){
         //ringtone/vibrtion
 
         try {
+            //get the uri of the ringtone to be played
             notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            //create the media player, set the audio stream
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setDataSource(context, notification);
             mediaPlayer.prepare();
+            //start the media player
             mediaPlayer.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,19 +37,13 @@ public class AlarmClass {
         // Get instance of Vibrator from current Context
         vibrator= (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
-        // Start without a delay
-        // Vibrate for 100 milliseconds
-        // Sleep for 1000 milliseconds
+        //create the pattern of vibration
+        // Start without a delay, Vibrate for 100 millisecond, Sleep for 1000 milliseconds
         long[] pattern = {0, 100, 1000};
 
-        // The '0' here means to repeat indefinitely
-        // '0' is actually the index at which the pattern keeps repeating from (the start)
-        // To repeat the pattern from any other point, you could increase the index, e.g. '1'
+        //repeat the pattern from the beginning
         vibrator.vibrate(pattern, 0);
 
     }
-//    public void stopSound(){
-//        mediaPlayer.stop();
-//        vibrator.cancel();
-//    }
+
 }

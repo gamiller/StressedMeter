@@ -34,24 +34,12 @@ import java.util.Random;
 public class GridViewFragment extends Fragment {
     public int GRID_NUM = 1;
     ImageAdapter myAdapter;
-
-    //private OnFragmentInteractionListener mListener;
+    GridView gridview;
 
     public GridViewFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static GridViewFragment newInstance() {
-        GridViewFragment fragment = new GridViewFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,75 +47,58 @@ public class GridViewFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_grid_view, container, false);
 
-            //super.onCreate(savedInstanceState);
-            //setContentView(R.layout.activity_main);
+        //generate random number in order to load random gridview
+        Random rand = new Random();
+        GRID_NUM = rand.nextInt((3 - 1) + 1) + 1;
 
-            Random rand = new Random();
-            GRID_NUM = rand.nextInt((3 - 1) + 1) + 1;
+        //load the photo gridview implementing PSM
+        gridview = (GridView) view.findViewById(R.id.gridview);
+        myAdapter = new ImageAdapter(getActivity());
+        gridview.setAdapter(myAdapter);
 
-            GridView gridview = (GridView) view.findViewById(R.id.gridview);
-            myAdapter = new ImageAdapter(getActivity());
-            gridview.setAdapter(myAdapter);
+        //when a photo is clicked
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                //stop the nosie and vibrations
+                AlarmClass.mediaPlayer.stop();
+                AlarmClass.vibrator.cancel();
 
-            gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View v,
-                                        int position, long id) {
-                    //Toast.makeText().show();
-//                    AlarmClass myAlarm = new AlarmClass();
-//                    myAlarm.stopSound();
-                    AlarmClass.mediaPlayer.stop();
-                    AlarmClass.vibrator.cancel();
-                    int stressScore = getStressScore(position);
+                //get the stress score for that position
+                int stressScore = getStressScore(position);
 
-                    Log.d("photoAct", "score " + stressScore);
+                //pass an intent with the photo id to PhotoActivity class to load
+                //the cancel/submit view
+                Intent myIntent = new Intent(getActivity(), PhotoActivity.class);
+                myIntent.putExtra("drawable_id", PSM.getGridById(GRID_NUM)[position]);
+                myIntent.putExtra("stress_score",stressScore);
 
+                startActivityForResult(myIntent, 0);
+            }
+        });
 
-                    Intent myIntent = new Intent(getActivity(), PhotoActivity.class);
-                    myIntent.putExtra("drawable_id", PSM.getGridById(GRID_NUM)[position]);
-                    myIntent.putExtra("stress_score",stressScore);
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("imageid", PSM.getGridById(GRID_NUM)[position]);
-//                myIntent.putExtras(bundle);
-                    startActivityForResult(myIntent, 0);
+        //button to get new photos in the gridview
+        Button nextPhotobtn = (Button) view.findViewById(R.id.moreimage_button);
+        nextPhotobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //generate the next grid number
+                if (GRID_NUM == 3) {
+                    GRID_NUM = 1;
+                } else {
+                    GRID_NUM++;
                 }
-            });
 
-//        Button nextPhotobtn = (Button) view.findViewById(R.id.moreimage_button);
-//        nextPhotobtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (GRID_NUM == 3) {
-//                    GRID_NUM = 1;
-//                } else {
-//                    GRID_NUM++;
-//                }
-//                //setContentView(v);
-//                GridView newgridview = (GridView) view.findViewById(R.id.gridview);
-//                newgridview.setAdapter(myAdapter);
-//
-//                //return gridview;
-//            }
-//        });
+                gridview.setAdapter(myAdapter);
+            }
+        });
 
 
-        //setContentView(view);
-
-//        GridViewFragment gridview = (GridViewFragment) view.findViewById(R.id.mygridview);
-//        gridview.setAdapter(new ImageAdapter(this));
-
-//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v,
-//                                    int position, long id) {
-//                Toast.makeText(HelloGridView.this, "" + position,
-//                        Toast.LENGTH_SHORT).show();
-////
-//
-
-        //delete this is for compiling
         return view;
     }
 
 
+    //ImageAdapter model based off of the android.com gridview instructions
     public class ImageAdapter extends BaseAdapter {
         private Context mContext;
 
@@ -152,38 +123,27 @@ public class GridViewFragment extends Fragment {
             if (convertView == null) {
                 // if it's not recycled, initialize some attributes
                 imageView = new ImageView(mContext);
+                //create photos large enough for the space
                 imageView.setLayoutParams(new GridView.LayoutParams(180, 180));
+                //if images need to be cropped, crop toward the center
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                //put padding around the photos
                 imageView.setPadding(1, 1, 1, 1);
             } else {
                 imageView = (ImageView) convertView;
             }
-
+            //get the pictures for that gridview using PSM
             imageView.setImageResource(PSM.getGridById(GRID_NUM)[position]);
             return imageView;
         }
 
-//        // references to our images
-//        private Integer[] mThumbIds = {
-//                R.drawable.sample_2, R.drawable.sample_3,
-//                R.drawable.sample_4, R.drawable.sample_5,
-//                R.drawable.sample_6, R.drawable.sample_7,
-//                R.drawable.sample_0, R.drawable.sample_1,
-//                R.drawable.sample_2, R.drawable.sample_3,
-//                R.drawable.sample_4, R.drawable.sample_5,
-//                R.drawable.sample_6, R.drawable.sample_7,
-//                R.drawable.sample_0, R.drawable.sample_1,
-//                R.drawable.sample_2, R.drawable.sample_3,
-//                R.drawable.sample_4, R.drawable.sample_5,
-//                R.drawable.sample_6, R.drawable.sample_7
-//        };
     }
 
 
     //look up table function for the stress score
     private int getStressScore(int position) {
         int value = 0;
-
+        //the stress score correlates to the position of the photo
         if (position == 0) {
             value = 6;
         } else if (position == 1) {
@@ -218,12 +178,9 @@ public class GridViewFragment extends Fragment {
             value = 11;
         }
 
-
-
         return value;
 
     }
-
 
 
 
