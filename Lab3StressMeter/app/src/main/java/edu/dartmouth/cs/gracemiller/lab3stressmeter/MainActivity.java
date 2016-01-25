@@ -2,17 +2,9 @@ package edu.dartmouth.cs.gracemiller.lab3stressmeter;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,11 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.Toast;
 
+
+// Tyler Albarran and Grace Miller
+// Stress Meter Lab 3
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,30 +27,22 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PSMScheduler.setSchedule(this);
+
+        // check to see if sound should play
         if(firstOpen) {
             AlarmClass myAlarm = new AlarmClass();
             myAlarm.startSound(this);
         }
         firstOpen = false;
 
-
-
+        // load layout
         setContentView(R.layout.activity_main);
 
-
-
+        // create toolbar for navigation drawer
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
+        // set up navigation drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -69,76 +52,31 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // instantiate grid view
         Fragment fragment = null;
         fragment = new GridViewFragment();
 
+        // create grid view fragment
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_holder, fragment).commit();
-
-//            // update selected item and title, then close the drawer
-//            mDrawerList.setItemChecked(position, true);
-//            mDrawerList.setSelection(position);
-//            setTitle(navMenuTitles[position]);
-//            mDrawerLayout.closeDrawer(mDrawerList);
         } else {
             // error in creating fragment
             Log.d("MainActivity", "Error in creating fragment");
         }
-//
-//        if(savedInstanceState == null) {
-//            FragmentManager manager = getFragmentManager();
-////            manager.beginTransaction().replace(R.id.fragment_holder).commit();
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            transaction.replace(R.id.fragment_holder, GridViewFragment.newInstance());
-//            transaction.commit();
-//        }
 
-//        mImageView = (ImageView) findViewById(R.id.imageView);
-
-        //gridViewFrag = findViewById(R.id.GridViewFragment);
-
-        //UNCOMMENT NEXT TWO LINES
-//        GridView thisGrid = findViewById(R.id.mygridview);
-//
-//        FragmentManager fragmentManager = getFragmentManager().beginTransaction().replace(R.id.mygridview).commit();
-
-
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//        GridViewFragment fragment = new GridViewFragment();
-//        fragmentTransaction.add(R.id.fragment_grid_view, fragment);
-//        fragmentTransaction.commit();
-//
-//        setContentView(R.layout.fragment_grid_view);
-//
-//        GridViewFragment gridview = (GridViewFragment) findViewById(R.id.GridViewFragment);
-//        gridview.setAdapter(new ImageAdapter(this));
-
-//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v,
-//                                    int position, long id) {
-//                Toast.makeText(HelloGridView.this, "" + position,
-//                        Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//    }
+        //check if the activity was called to exit
                 Intent checkExit = getIntent();
         if (checkExit.getBooleanExtra("exit",false)) {
-                AlarmClass.mediaPlayer.stop();
-                AlarmClass.vibrator.cancel();
-//            Log.d("main", "exiting");
-//            Intent exitMain = new Intent(Intent.ACTION_MAIN);
-////            exitMain.addCategory(Intent.CATEGORY_BROWSABLE);
-//            exitMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            exitMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(exitMain);
+            AlarmClass.mediaPlayer.stop();
+            AlarmClass.vibrator.cancel();
             finish();
         }
 
     }
+
+    // Navigation view handle back press
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -149,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    // add items to the menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -156,6 +95,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    // check to see if items in menu are selected
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -171,6 +111,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    // handles menu selection
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -179,57 +120,31 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         String title = getString(R.string.app_name);
 
+        // if StressMeter chosen
         if (id == R.id.nav_grid) {
-            // Handle the camera action
-//            fragment = new GridViewFragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.mainFrame, fragment);
-//            ft.commit();
 
+            // create a grid view fragment
             Fragment mGridFragment = null;
             mGridFragment = new GridViewFragment();
 
-//            if (fragment != null) {
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_holder, mGridFragment).commit();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_holder, mGridFragment).commit();
 
-//            // update selected item and title, then close the drawer
-//            mDrawerList.setItemChecked(position, true);
-//            mDrawerList.setSelection(position);
-//            setTitle(navMenuTitles[position]);
-//            mDrawerLayout.closeDrawer(mDrawerList);
-//            } else {
-                // error in creating fragment
-                Log.d("MainActivity", "Error in creating fragment");
-//            }
-
-
+        // else if results is chosen
         } else if (id == R.id.nav_results) {
 
+            // create results fragment
             Fragment mResultsFragment = null;
             mResultsFragment = new ResultsFragment();
 
-//            if (fragment != null) {
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_holder, mResultsFragment).commit();
 
-//            // update selected item and title, then close the drawer
-//            mDrawerList.setItemChecked(position, true);
-//            mDrawerList.setSelection(position);
-//            setTitle(navMenuTitles[position]);
-//            mDrawerLayout.closeDrawer(mDrawerList);
-//            } else {
-                // error in creating fragment
-                Log.d("MainActivity", "Error in creating fragment");
-//            }
         }
 
-//        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.content_frame, fragment);
-//        ft.commit();
-
+        // close navigation drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
